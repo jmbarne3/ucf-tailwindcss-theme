@@ -5,6 +5,11 @@
  *                                `.ucf-composition-*` class per composition. The names match the
  *                                component library's ucf.css, so the theme works with or without
  *                                it on the page, and the two never disagree.
+ *   src/generated/theme.css      Tailwind's @theme: its defaults cleared where they are off-brand,
+ *                                and each namespace pointed at the --ucf-* variables.
+ *   src/generated/elements.css   Headings, body copy, links and captions from elements.json, in
+ *                                @layer base, and the `type-h1` to `type-h6` utilities that give
+ *                                any element a heading's look.
  *
  * The output is committed: sites install this package from source and don't run the build.
  * `npm test` fails if a generated file is out of date.
@@ -200,11 +205,109 @@ ${ declarations( entries, indent ) }
 `;
 }
 
+// ── elements.css ─────────────────────────────────────────────────────────────
+//
+// WHY plain element selectors, not the library's :where(): Preflight resets h1 to h6 and `a`
+// with plain selectors in the same base layer. Equal specificity, later in the source, is
+// what lets these restore the brand's styles. Utilities still win: they are a later layer.
+
+const kebab = ( key ) => key.replace( /[A-Z]/g, ( c ) => `-${ c.toLowerCase() }` );
+const TYPOGRAPHY_PROPERTY = { textDecoration: 'text-decoration-line' };
+
+/** One theme.json-shaped element entry (`typography`, `color`, `css`) as declarations. */
+function elementDeclarations( entry ) {
+	const out = [];
+	for ( const [ key, value ] of Object.entries( entry.typography ?? {} ) ) {
+		out.push( [ TYPOGRAPHY_PROPERTY[ key ] ?? kebab( key ), toCss( value ) ] );
+	}
+	if ( entry.color?.text ) {
+		out.push( [ 'color', toCss( entry.color.text ) ] );
+	}
+	if ( entry.color?.background ) {
+		out.push( [ 'background-color', toCss( entry.color.background ) ] );
+	}
+	for ( const [ key, value ] of Object.entries( entry.css ?? {} ) ) {
+		if ( ! key.startsWith( '$' ) ) {
+			out.push( [ key, toCss( value ) ] );
+		}
+	}
+	return out;
+}
+
+const ELEMENT_SELECTORS = {
+	heading: 'h1, h2, h3, h4, h5, h6',
+	h1: 'h1',
+	h2: 'h2',
+	h3: 'h3',
+	h4: 'h4',
+	h5: 'h5',
+	h6: 'h6',
+	link: 'a',
+	caption: 'figcaption',
+};
+
+const rule = ( selector, entries, indent = '\t' ) =>
+	`${ indent }${ selector } {\n${ declarations( entries, indent + '\t' ) }\n${ indent }}`;
+
+export function elementsCss() {
+	const rules = [
+		// The page's own ground and copy color follow the composition roles too.
+		rule( 'body', [
+			...elementDeclarations( elements.root ),
+			[ 'background-color', 'var(--ucf-surface)' ],
+			[ 'color', 'var(--ucf-body)' ],
+		] ),
+	];
+
+	for ( const [ key, entry ] of Object.entries( elements.elements ) ) {
+		const selector = ELEMENT_SELECTORS[ key ];
+		if ( ! selector ) {
+			throw new Error( `build-tokens: elements.json element "${ key }" has no selector.` );
+		}
+		rules.push( rule( selector, elementDeclarations( entry ) ) );
+		for ( const [ state, stateEntry ] of Object.entries( entry ) ) {
+			if ( state.startsWith( ':' ) ) {
+				rules.push( rule( `${ selector }${ state }`, elementDeclarations( stateEntry ) ) );
+			}
+		}
+	}
+
+	for ( const [ selector, css ] of Object.entries( elements.text ) ) {
+		if ( ! selector.startsWith( '$' ) ) {
+			rules.push( rule( selector, elementDeclarations( { css } ) ) );
+		}
+	}
+
+	// `type-h2` gives any element an h2's look: the shared heading rules, then the level's.
+	const typeUtilities = [ 1, 2, 3, 4, 5, 6 ].map( ( level ) =>
+		rule(
+			`@utility type-h${ level }`,
+			// The level's declarations replace the shared ones of the same property.
+			Object.entries(
+				Object.fromEntries( [
+					...elementDeclarations( elements.elements.heading ),
+					...elementDeclarations( elements.elements[ `h${ level }` ] ),
+				] )
+			),
+			''
+		)
+	);
+
+	return `${ HEADER }
+@layer base {
+${ rules.join( '\n\n' ) }
+}
+
+${ typeUtilities.join( '\n\n' ) }
+`;
+}
+
 // ── Write ────────────────────────────────────────────────────────────────────
 
 export const OUTPUTS = {
 	'src/generated/tokens.css': tokensCss,
 	'src/generated/theme.css': themeCss,
+	'src/generated/elements.css': elementsCss,
 };
 
 if ( import.meta.url === `file://${ process.argv[ 1 ] }` ) {
