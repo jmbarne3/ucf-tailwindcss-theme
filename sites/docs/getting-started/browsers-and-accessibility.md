@@ -14,7 +14,9 @@ A few components depend on newer features and say so on their own pages. The `co
 
 ## Accessibility
 
-**Every text role clears 4.5:1 on every composition, and every control edge clears 3:1.** The component library's tests check those ratios against `tokens.json`. This theme's tests check them again on the copy it ships, and the [roles page](/tokens/roles-and-compositions/) prints every ratio.
+**Every text role clears 4.5:1 on each composition's field and raised panel, and every control edge clears 3:1.** The component library's tests check those pairs against `tokens.json`, this theme's tests check them again on the copy it ships, and the [roles page](/tokens/roles-and-compositions/) prints every ratio.
+
+One gap remains, and it isn't fixed yet. On the Bold Gold composition's own background, the `danger` and `success` roles measure 3.59:1 and 3.43:1, below the 4.5:1 text needs. Until the library's tokens change, don't put error or success text, including `form-error`, directly on a Bold Gold section. Put the form on a `bg-raised` panel, where both pass.
 
 The theme also builds a few accessible defaults into its CSS:
 
