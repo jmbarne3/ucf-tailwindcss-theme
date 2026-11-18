@@ -1,0 +1,21 @@
+/*
+ * Heading underline: an uppercase heading with a short, heavy rule beneath it, carried over
+ * from Athena. The rule is the accent role, so it is Bold Gold on light and dark sections and
+ * black on Bold Gold, with no `-inverse` variant to remember.
+ */
+@utility heading-underline {
+  display: block;
+  padding-bottom: 0.65rem;
+  position: relative;
+  text-transform: uppercase;
+
+  &::after {
+    border-bottom: var(--ucf-custom-rule-accent) solid var(--ucf-accent);
+    bottom: 0;
+    content: '';
+    inset-inline-start: 0;
+    min-width: 2rem;
+    position: absolute;
+    width: 1em;
+  }
+}
