@@ -1,0 +1,25 @@
+/*
+ * Badge: a short label on the accent role (Bold Gold with black text, or black with white on a
+ * Bold Gold section). `badge-outline` is the quieter version. Square, as everything is.
+ */
+@utility badge {
+  align-items: center;
+  background-color: var(--badge-bg, var(--ucf-accent));
+  border: var(--ucf-custom-border-hairline) solid var(--badge-border, transparent);
+  color: var(--badge-fg, var(--ucf-on-accent));
+  display: inline-flex;
+  font-size: var(--ucf-font-size-data);
+  font-weight: 700;
+  gap: 0.375em;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  padding: 0.4em 0.65em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@utility badge-outline {
+  --badge-bg: transparent;
+  --badge-border: currentcolor;
+  --badge-fg: var(--ucf-body);
+}
