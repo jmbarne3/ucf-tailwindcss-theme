@@ -1,0 +1,18 @@
+/*
+ * The two page widths from the library's layout tokens, centered with the responsive
+ * gutter on either side: `layout-wide` (1240px) for most sections, `layout-content` (720px)
+ * for reading. These match the component library's Section widths.
+ */
+@utility layout-wide {
+  box-sizing: content-box;
+  margin-inline: auto;
+  max-width: var(--ucf-layout-wide);
+  padding-inline: var(--ucf-custom-gutter);
+}
+
+@utility layout-content {
+  box-sizing: content-box;
+  margin-inline: auto;
+  max-width: var(--ucf-layout-content);
+  padding-inline: var(--ucf-custom-gutter);
+}
