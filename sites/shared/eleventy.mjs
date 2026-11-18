@@ -2,6 +2,7 @@
  * Eleventy setup shared by the docs and the kitchen sink: Markdown, syntax highlighting, the
  * `example` shortcode, the theme's fonts, and live reload when Tailwind rewrites the CSS.
  */
+import { HtmlBasePlugin } from '@11ty/eleventy';
 import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import { createHighlighter } from 'shiki';
@@ -76,8 +77,18 @@ export default async function shared( eleventyConfig, { name } ) {
 	eleventyConfig.setServerOptions( { watch: [ `_site/${ name }/assets/*.css` ] } );
 	eleventyConfig.addWatchTarget( 'sites/shared/' );
 
-	eleventyConfig.addGlobalData( 'links', {
-		docs: process.env.DOCS_URL ?? 'http://localhost:8080',
-		demo: process.env.DEMO_URL ?? 'http://localhost:8081',
-	} );
+	/*
+	 * Deployed, SITE_URL is where the docs live (e.g. https://user.github.io/repo) and the kitchen
+	 * sink sits beneath it at /demo/. HtmlBasePlugin prefixes every root-relative href and src with
+	 * that path, so templates keep writing `/assets/…`. WHY the cross-site links are absolute: the
+	 * plugin leaves full URLs alone, but would prefix a root-relative one a second time.
+	 */
+	const site = process.env.SITE_URL?.replace( /\/$/, '' );
+	const links = site
+		? { docs: `${ site }/`, demo: `${ site }/demo/` }
+		: { docs: 'http://localhost:8080/', demo: 'http://localhost:8081/' };
+	eleventyConfig.addGlobalData( 'links', links );
+	eleventyConfig.addPlugin( HtmlBasePlugin );
+
+	return { pathPrefix: site ? new URL( links[ name ] ).pathname : '/' };
 }

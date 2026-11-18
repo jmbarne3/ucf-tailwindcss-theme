@@ -1,9 +1,10 @@
 import shared from '../shared/eleventy.mjs';
 
 export default async function ( eleventyConfig ) {
-	await shared( eleventyConfig, { name: 'demo' } );
+	const { pathPrefix } = await shared( eleventyConfig, { name: 'demo' } );
 
 	return {
+		pathPrefix,
 		dir: {
 			input: 'sites/demo',
 			output: '_site/demo',

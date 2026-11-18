@@ -1,7 +1,7 @@
 import shared from '../shared/eleventy.mjs';
 
 export default async function ( eleventyConfig ) {
-	await shared( eleventyConfig, { name: 'docs' } );
+	const { pathPrefix } = await shared( eleventyConfig, { name: 'docs' } );
 
 	// The sidebar: every page with a `section`, grouped in SECTIONS order, then by `order`.
 	const SECTIONS = [ 'Getting Started', 'Tokens', 'Layout', 'Content', 'Components', 'Utilities' ];
@@ -16,6 +16,7 @@ export default async function ( eleventyConfig ) {
 	);
 
 	return {
+		pathPrefix,
 		dir: {
 			input: 'sites/docs',
 			output: '_site/docs',
