@@ -1,6 +1,6 @@
 # UCF Tailwind CSS Theme — Implementation Plan
 
-**Status:** Draft for review · **Prepared:** November 18, 2026 · **Repository:** local only, not linked to GitHub
+**Status:** Approved, in progress · **Prepared:** November 18, 2026 · **Repository:** local only, not linked to GitHub
 
 ## What this project is
 
@@ -14,9 +14,9 @@ Two token sources exist today, and they disagree. Athena v2 keeps its brand valu
 
 We should not add a third source. I recommend this theme read the library's `tokens.json` directly, so a Tailwind utility such as `text-link` resolves to the same `--ucf-link` variable a library component reads. That decision, along with three others, is below.
 
-## Decisions needed before we start
+## Decisions
 
-I've given a recommendation for each. I'll follow these unless you tell me otherwise.
+All four were approved as recommended on November 18, 2026.
 
 - **Where the tokens come from.** I recommend the library's `tokens.json` as the only source. A `sync:tokens` script copies it into this repo and a `check:tokens` script fails when the copy is stale, which is the same pattern the block theme already uses. Athena's values that the library doesn't have (the info and warning colors, the gold tints) are not carried forward unless we add them to the library first.
 - **How much of Athena's component surface comes along.** I recommend tokens, base element styles, brand utilities, and a set of CSS-only component classes (buttons, form controls, cards, alerts, badges, tables, breadcrumbs, pagination, navigation) built on native elements — `<dialog>` for modals and drawers, `<details>` for accordions, and the `popover` attribute for menus. No JavaScript bundle. Components with saved markup or real behavior, such as the Degree Finder, stay in the component library.
