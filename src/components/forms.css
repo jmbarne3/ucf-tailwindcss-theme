@@ -1,0 +1,109 @@
+/*
+ * Form controls. Each reads the field, line and body roles, so a form on a Dark section needs
+ * no extra classes.
+ *
+ *   form-label, form-help, form-error   text around a control
+ *   form-input                          <input>, <textarea>
+ *   form-select                         <select>
+ *   form-check                          a wrapper for one checkbox or radio and its label
+ *
+ * Invalid state: `aria-invalid="true"`, or the browser's own `:user-invalid` after the person
+ * has interacted with the control. Both turn the edge to the danger role.
+ */
+
+@utility form-label {
+  color: var(--ucf-heading);
+  display: block;
+  font-size: var(--ucf-font-size-small);
+  font-weight: 700;
+  margin-bottom: 0.375rem;
+}
+
+@utility form-help {
+  color: var(--ucf-muted);
+  display: block;
+  font-size: var(--ucf-font-size-small);
+  margin-top: 0.375rem;
+}
+
+@utility form-error {
+  color: var(--ucf-danger);
+  display: block;
+  font-size: var(--ucf-font-size-small);
+  font-weight: 600;
+  margin-top: 0.375rem;
+}
+
+@utility form-input {
+  appearance: none;
+  background-color: var(--ucf-field);
+
+  /* A11Y: line-strong clears the 3:1 a control's edge needs on every composition. */
+  border: var(--ucf-custom-border-control) solid var(--ucf-line-strong);
+  color: var(--ucf-body);
+  display: block;
+  font-family: inherit;
+
+  /* FIX: 16px or larger stops iOS Safari zooming the page when the field takes focus. */
+  font-size: 1rem;
+  line-height: 1.5;
+  min-height: var(--ucf-custom-tap-target);
+  padding: 0.5rem 0.875rem;
+  transition: border-color 0.15s ease;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--ucf-muted);
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    border-color: var(--ucf-focus);
+    outline: var(--ucf-custom-focus-width) solid var(--ucf-focus);
+    outline-offset: 0;
+  }
+
+  &[aria-invalid='true'],
+  &:user-invalid {
+    border-color: var(--ucf-danger);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+/* WHY a gradient chevron, not an SVG: a background image can't read currentcolor, and the
+   arrow has to follow the body role onto dark fields. */
+@utility form-select {
+  @apply form-input;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ucf-body) 50%),
+    linear-gradient(135deg, var(--ucf-body) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.25rem) 55%,
+    calc(100% - 0.875rem) 55%;
+  background-repeat: no-repeat;
+  background-size: 0.375rem 0.375rem;
+  padding-right: 2.75rem;
+}
+
+/* The native checkbox and radio, kept native for their built-in accessibility, in the
+   indicator role: black on light sections, Bold Gold on dark ones. Radios stay round: their
+   shape tells people what they are. */
+@utility form-check {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.625rem;
+  min-height: var(--ucf-custom-tap-target);
+  padding-block: 0.625rem;
+
+  & > input {
+    accent-color: var(--ucf-indicator);
+    flex-shrink: 0;
+    height: 1.25rem;
+    margin-top: 0.15em;
+    width: 1.25rem;
+  }
+}
