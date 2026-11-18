@@ -14,6 +14,7 @@ import path from 'node:path';
 
 import {
 	compositions,
+	loadElements,
 	loadTokens,
 	primitives,
 	roleNames,
@@ -95,6 +96,69 @@ THEME.push( {
 		...tokensOf( 'color' ).map( ( t ) => [ `--color-${ t.slug }`, `var(${ t.cssVar })` ] ),
 		...roleNames( tokens ).map( ( role ) => [ `--color-${ role }`, `var(${ roleVar( role ) })` ] ),
 		[ '--color-surface', 'var(--ucf-surface)' ],
+	],
+} );
+
+// Type. Families keep the library's names (`font-display`, `font-body`, `font-mono`).
+// WHY sizes are renamed: the library's `body` and `lead` sizes would collide with the `body`
+// and `lead` color roles as `text-body` and `text-lead`. They take Tailwind's familiar
+// `text-base` and `text-lg`; the rest keep their names, and headings shorten to `text-h1`.
+const TEXT_NAMES = {
+	data: 'data',
+	small: 'sm',
+	'data-lg': 'data-lg',
+	body: 'base',
+	lead: 'lg',
+	'heading-6': 'h6',
+	'heading-5': 'h5',
+	'heading-4': 'h4',
+	'heading-3': 'h3',
+	'heading-2': 'h2',
+	'heading-1': 'h1',
+	'display-1': 'display',
+};
+
+// Each size's paired line height. Headings, body and data come from elements.json; small,
+// data-lg, lead and display have none there, so these four are the theme's own.
+const elements = loadElements();
+const lineHeightOf = ( key ) => elements.elements[ key ]?.typography?.lineHeight;
+const LINE_HEIGHTS = {
+	data: lineHeightOf( 'caption' ),
+	small: '1.5',
+	'data-lg': '1.5',
+	body: elements.root.typography.lineHeight,
+	lead: '1.5',
+	'heading-6': lineHeightOf( 'h6' ),
+	'heading-5': lineHeightOf( 'h5' ),
+	'heading-4': lineHeightOf( 'h4' ),
+	'heading-3': lineHeightOf( 'h3' ),
+	'heading-2': lineHeightOf( 'h2' ),
+	'heading-1': lineHeightOf( 'h1' ),
+	'display-1': '0.95',
+};
+
+THEME.push( {
+	clear: [ '--font-*', '--text-*' ],
+	defaults: [
+		[ '--default-font-family', 'var(--ucf-font-family-body)' ],
+		[ '--default-mono-font-family', 'var(--ucf-font-family-mono)' ],
+	],
+	entries: [
+		...tokensOf( 'font-family' ).map( ( t ) => [ `--font-${ t.slug }`, `var(${ t.cssVar })` ] ),
+		...tokensOf( 'font-size' ).flatMap( ( t ) => {
+			const name = TEXT_NAMES[ t.slug ];
+			if ( ! name ) {
+				throw new Error( `build-tokens: font-size.${ t.slug } has no Tailwind name in TEXT_NAMES.` );
+			}
+			return [
+				[ `--text-${ name }`, `var(${ t.cssVar })` ],
+				[ `--text-${ name }--line-height`, LINE_HEIGHTS[ t.slug ] ],
+			];
+		} ),
+		[ '--tracking-heading', elements.elements.heading.typography.letterSpacing ],
+		[ '--tracking-button', 'var(--ucf-custom-button-letter-spacing)' ],
+		[ '--leading-heading', elements.elements.heading.typography.lineHeight ],
+		[ '--leading-body', elements.root.typography.lineHeight ],
 	],
 } );
 

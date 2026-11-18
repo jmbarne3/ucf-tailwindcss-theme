@@ -2,6 +2,10 @@
 
 @theme {
 	--color-*: initial;
+	--font-*: initial;
+	--text-*: initial;
+	--default-font-family: var(--ucf-font-family-body);
+	--default-mono-font-family: var(--ucf-font-family-mono);
 }
 
 @theme inline {
@@ -57,4 +61,35 @@
 	--color-success-soft: var(--ucf-success-soft);
 	--color-on-body: var(--ucf-on-body);
 	--color-surface: var(--ucf-surface);
+	--font-display: var(--ucf-font-family-display);
+	--font-body: var(--ucf-font-family-body);
+	--font-mono: var(--ucf-font-family-mono);
+	--text-data: var(--ucf-font-size-data);
+	--text-data--line-height: 1.55;
+	--text-sm: var(--ucf-font-size-small);
+	--text-sm--line-height: 1.5;
+	--text-data-lg: var(--ucf-font-size-data-lg);
+	--text-data-lg--line-height: 1.5;
+	--text-base: var(--ucf-font-size-body);
+	--text-base--line-height: 1.65;
+	--text-lg: var(--ucf-font-size-lead);
+	--text-lg--line-height: 1.5;
+	--text-h6: var(--ucf-font-size-heading-6);
+	--text-h6--line-height: 1.4;
+	--text-h5: var(--ucf-font-size-heading-5);
+	--text-h5--line-height: 1.4;
+	--text-h4: var(--ucf-font-size-heading-4);
+	--text-h4--line-height: 1.3;
+	--text-h3: var(--ucf-font-size-heading-3);
+	--text-h3--line-height: 1.1;
+	--text-h2: var(--ucf-font-size-heading-2);
+	--text-h2--line-height: 1.04;
+	--text-h1: var(--ucf-font-size-heading-1);
+	--text-h1--line-height: 0.98;
+	--text-display: var(--ucf-font-size-display-1);
+	--text-display--line-height: 0.95;
+	--tracking-heading: 0.01em;
+	--tracking-button: var(--ucf-custom-button-letter-spacing);
+	--leading-heading: 1.1;
+	--leading-body: 1.65;
 }
