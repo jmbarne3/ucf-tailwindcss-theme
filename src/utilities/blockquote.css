@@ -1,0 +1,32 @@
+/*
+ * Blockquote with a large opening quotation mark, carried over from Athena. The mark is the
+ * accent role, so it follows the section like the heading underline does.
+ */
+@utility blockquote-quotation {
+  padding: 1.5em 0 1em 2.75em;
+  position: relative;
+  z-index: 0;
+
+  @variant md {
+    padding-left: 3.75em;
+    padding-top: 2em;
+  }
+
+  &::before {
+    color: var(--ucf-accent);
+    content: '\201C';
+    font-family: var(--ucf-font-family-display);
+    font-size: 5.25em;
+    font-style: normal;
+    font-weight: 600;
+    left: -0.05em;
+    line-height: 0;
+    position: absolute;
+    top: 0.575em;
+    z-index: -1;
+
+    @variant md {
+      top: 0.65em;
+    }
+  }
+}
