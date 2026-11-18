@@ -1,0 +1,28 @@
+/*
+ * Alert: a message panel with an accent rule on its leading edge. The plain alert is for
+ * information; `alert-success` and `alert-danger` take the library's state roles.
+ *
+ * WHY no warning or info variant: the brand's state colors are success and danger only, and
+ * Bold Gold already does the work of "notice". A new state starts in tokens.json.
+ * A11Y: add role="status" for a polite announcement, or role="alert" for an error that
+ * appears after the page loads.
+ */
+@utility alert {
+  background-color: var(--alert-bg, var(--ucf-raised));
+  border-inline-start: var(--ucf-custom-rule-accent) solid var(--alert-rule, var(--ucf-accent));
+  color: var(--ucf-body);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+
+@utility alert-success {
+  --alert-bg: var(--ucf-success-soft);
+  --alert-rule: var(--ucf-success);
+}
+
+@utility alert-danger {
+  --alert-bg: var(--ucf-danger-soft);
+  --alert-rule: var(--ucf-danger);
+}
