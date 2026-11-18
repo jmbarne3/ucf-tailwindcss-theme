@@ -37,15 +37,19 @@
     "sync:tokens": "node scripts/sync-tokens.mjs",
     "check:tokens": "node scripts/sync-tokens.mjs --check",
     "test": "node --test test/*.test.mjs",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "check:a11y": "node scripts/check-a11y.mjs",
+    "check": "npm run check:tokens && npm test && npm run build && npm run check:a11y"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",
     "@tailwindcss/cli": "^4.3.5",
     "@tailwindcss/node": "^4.3.5",
+    "axe-core": "^4.14.1",
     "concurrently": "^10.0.7",
     "markdown-it": "^15.0.3",
     "markdown-it-anchor": "^10.1.0",
+    "puppeteer-core": "^25.18.1",
     "shiki": "^4.6.0",
     "tailwindcss": "^4.3.5"
   }
