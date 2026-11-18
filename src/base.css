@@ -1,0 +1,26 @@
+/*
+ * Base styles that elements.json doesn't hold. Everything here reads a role, so it follows the
+ * composition it sits in.
+ */
+
+@layer base {
+  /* A11Y: one focus ring everywhere: the focus role (black on light and gold, Bold Gold on
+     dark), 3px, which clears 3:1 against every composition's background. */
+  :focus-visible {
+    outline: var(--ucf-custom-focus-width) solid var(--ucf-focus);
+    outline-offset: 2px;
+  }
+
+  hr {
+    border-top: var(--ucf-custom-border-hairline) solid var(--ucf-line);
+  }
+
+  ::selection {
+    background-color: var(--ucf-color-gold);
+    color: var(--ucf-color-black);
+  }
+
+  code, kbd, samp, pre {
+    font-size: 0.9375em;
+  }
+}
