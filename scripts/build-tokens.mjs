@@ -72,10 +72,53 @@ ${ compositionBlocks.join( '\n\n' ) }
 `;
 }
 
+// ── theme.css ────────────────────────────────────────────────────────────────
+//
+// Tailwind's namespaces, pointed at the --ucf-* variables. Two blocks:
+//
+//   @theme         clears Tailwind's defaults where they would put off-brand values in
+//                  reach (its 22-hue palette, rounded corners, its type scale and shadows).
+//   @theme inline  maps each namespace to a --ucf-* variable. WHY inline: a utility then
+//                  compiles to `var(--ucf-link)` itself, not to `var(--color-link)` set once on
+//                  :root, so a role re-pointed by a composition reaches every utility inside it.
+
+/** Each namespace's entries as [Tailwind variable, value]. Filled in below, one per group. */
+const THEME = [];
+
+const tokensOf = ( group ) => primitives( tokens ).filter( ( t ) => t.group === group );
+
+// Colors: every primitive, then every role. `bg-gold` is always Bold Gold; `bg-accent` is
+// whatever the section's accent is.
+THEME.push( {
+	clear: [ '--color-*' ],
+	entries: [
+		...tokensOf( 'color' ).map( ( t ) => [ `--color-${ t.slug }`, `var(${ t.cssVar })` ] ),
+		...roleNames( tokens ).map( ( role ) => [ `--color-${ role }`, `var(${ roleVar( role ) })` ] ),
+		[ '--color-surface', 'var(--ucf-surface)' ],
+	],
+} );
+
+export function themeCss() {
+	const clear = THEME.flatMap( ( n ) => n.clear ?? [] );
+	const defaults = THEME.flatMap( ( n ) => n.defaults ?? [] );
+	const entries = THEME.flatMap( ( n ) => n.entries ?? [] );
+	const indent = '\t';
+	return `${ HEADER }
+@theme {
+${ declarations( [ ...clear.map( ( name ) => [ name, 'initial' ] ), ...defaults ], indent ) }
+}
+
+@theme inline {
+${ declarations( entries, indent ) }
+}
+`;
+}
+
 // ── Write ────────────────────────────────────────────────────────────────────
 
 export const OUTPUTS = {
 	'src/generated/tokens.css': tokensCss,
+	'src/generated/theme.css': themeCss,
 };
 
 if ( import.meta.url === `file://${ process.argv[ 1 ] }` ) {

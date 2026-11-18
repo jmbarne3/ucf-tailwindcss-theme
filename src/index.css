@@ -1,0 +1,13 @@
+/*
+ * UCF Tailwind CSS theme.
+ *
+ * Import it after Tailwind:
+ *
+ *   @import "tailwindcss";
+ *   @import "@ucf/tailwindcss-theme";
+ *
+ * Fonts are separate (fonts.css), because the host page decides how fonts load.
+ */
+
+@import "./generated/tokens.css";
+@import "./generated/theme.css";
