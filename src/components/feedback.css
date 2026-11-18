@@ -1,0 +1,47 @@
+/*
+ * Spinner and progress bar, in the indicator role (black on light sections, Bold Gold on
+ * dark), which clears the 3:1 a graphic needs.
+ * The spinner stays round: its shape tells people what it is.
+ * A11Y: give a spinner role="status" and visible or `sr-only` text ("Loading").
+ */
+@keyframes ucf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility spinner {
+  animation: ucf-spin 0.75s linear infinite;
+  border: 0.25em solid var(--ucf-line);
+  border-radius: 9999px;
+  border-top-color: var(--ucf-indicator);
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 2.5s;
+  }
+}
+
+@utility progress {
+  appearance: none;
+  background-color: var(--ucf-line);
+  border: 0;
+  color: var(--ucf-indicator);
+  display: block;
+  height: 0.5rem;
+  width: 100%;
+
+  &::-webkit-progress-bar {
+    background-color: var(--ucf-line);
+  }
+
+  &::-webkit-progress-value {
+    background-color: var(--ucf-indicator);
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--ucf-indicator);
+  }
+}
