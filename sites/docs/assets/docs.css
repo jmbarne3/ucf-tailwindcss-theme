@@ -25,6 +25,15 @@
     margin-top: 0.75rem;
   }
 
+  /* Long-form pages read better a step down from the element scale. */
+  .docs-prose > h2 {
+    font-size: var(--ucf-font-size-heading-3);
+  }
+
+  .docs-prose > h3 {
+    font-size: var(--ucf-font-size-heading-5);
+  }
+
   .docs-prose > :is(h2, h3) a {
     color: inherit;
     text-decoration: none;
