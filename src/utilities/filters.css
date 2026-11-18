@@ -1,0 +1,9 @@
+/*
+ * Athena's sepia image treatment: a muted, warm duotone for photos set behind text.
+ * Tailwind's own filters (`grayscale`, `brightness-125`, `blur-sm`) cover Athena's other
+ * filter classes, and every variant works with all of them: `hover:filter-none`,
+ * `group-hover:filter-sepia`. Add `transition-[filter]` for Athena's eased change.
+ */
+@utility filter-sepia {
+  filter: grayscale(1) sepia(0.15) contrast(0.65) brightness(0.65);
+}
