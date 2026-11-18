@@ -1,0 +1,37 @@
+---
+layout: demo.liquid
+title: Utilities
+---
+{%- assign photo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23666'/%3E%3Cpath d='M0 9 6 3l4 4 2-2 4 4z' fill='%23EDB80D'/%3E%3Ccircle cx='12' cy='2.5' r='1' fill='%23fff'/%3E%3C/svg%3E" %}
+{%- for c in compositions %}
+<section class="ucf-composition-{{ c.slug }} py-section">
+  <div class="layout-wide">
+    {% render "section-heading.liquid", heading: c.name, slug: c.slug %}
+    <div class="grid gap-12 lg:grid-cols-3">
+      <div>
+        <h3 class="heading-underline type-h4">Heading underline</h3>
+        <blockquote class="blockquote-quotation mt-6"><p class="type-lead">The quotation mark follows the accent role.</p></blockquote>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-raised p-4 text-sm">bg-raised</div>
+        <div class="bg-field border-2 border-line-strong p-4 text-sm">bg-field, border-line-strong</div>
+        <div class="border-t border-line pt-3 text-sm text-muted">border-line, text-muted</div>
+        <div class="bg-accent text-on-accent p-4 text-sm font-bold">bg-accent, text-on-accent</div>
+        <div class="bg-danger-soft text-danger p-4 text-sm font-bold">bg-danger-soft, text-danger</div>
+        <div class="bg-success-soft text-success p-4 text-sm font-bold">bg-success-soft, text-success</div>
+      </div>
+      <a class="group block no-underline" href="#">
+        <img class="w-full aspect-video object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0" src="{{ photo }}" alt="">
+        <span class="block mt-2 font-bold text-body group-hover:underline">grayscale, group-hover:grayscale-0</span>
+      </a>
+    </div>
+  </div>
+</section>
+{%- endfor %}
+<section class="media-background-container ucf-composition-dark">
+  <img class="media-background filter-sepia" src="{{ photo }}" alt="">
+  <div class="layout-wide py-section">
+    <h2 class="type-display text-white">Media background</h2>
+    <p class="type-lead mt-4 max-w-measure text-white">media-background-container, media-background and filter-sepia.</p>
+  </div>
+</section>

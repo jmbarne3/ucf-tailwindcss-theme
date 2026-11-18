@@ -1,0 +1,106 @@
+<div class="grid gap-12 lg:grid-cols-2">
+  <div class="flex flex-col gap-10">
+    <div>
+      <h3 class="type-h6 mb-3">Buttons</h3>
+      <div class="flex flex-wrap items-center gap-3">
+        <a class="btn" href="#">Apply now</a>
+        <a class="btn btn-outline" href="#">Visit</a>
+        <a class="btn btn-text" href="#">See all</a>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 mt-3">
+        <button class="btn btn-sm" type="button">Small</button>
+        <button class="btn btn-lg" type="button">Large</button>
+        <button class="btn btn-outline btn-sm" type="button" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Badges and alerts</h3>
+      <div class="flex flex-wrap gap-2 mb-4"><span class="badge">New</span><span class="badge badge-outline">Graduate</span></div>
+      <div class="grid gap-3">
+        <div class="alert"><p><strong>Heads up.</strong> Registration opens March 3.</p></div>
+        <div class="alert alert-success"><p><strong>Saved.</strong> Your changes are live.</p></div>
+        <div class="alert alert-danger"><p><strong>Something went wrong.</strong> Try again.</p></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Card</h3>
+      <article class="card">
+        <p class="type-data uppercase text-accent-text">Program</p>
+        <h4 class="type-h4"><a class="text-heading no-underline hover:underline after:absolute after:inset-0" href="#">Computer Science, BS</a></h4>
+        <p class="text-muted">The whole card is one link.</p>
+      </article>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Navigation</h3>
+      <nav aria-label="Breadcrumb ({{ id }})"><ol class="breadcrumb"><li><a href="#">Home</a></li><li><a href="#">Academics</a></li><li><span aria-current="page">Programs</span></li></ol></nav>
+      <nav aria-label="Pages ({{ id }})" class="mt-4"><ul class="pagination"><li><a href="#">1</a></li><li><span aria-current="page">2</span></li><li><a href="#">3</a></li></ul></nav>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-10">
+    <div>
+      <h3 class="type-h6 mb-3">Form</h3>
+      <div class="grid gap-4">
+        <div><label class="form-label" for="name-{{ id }}">Full name</label><input class="form-input" id="name-{{ id }}" type="text"></div>
+        <div><label class="form-label" for="term-{{ id }}">Term</label><select class="form-select" id="term-{{ id }}"><option>Fall 2027</option><option>Spring 2028</option></select></div>
+        <div>
+          <label class="form-label" for="zip-{{ id }}">ZIP code</label>
+          <input class="form-input" id="zip-{{ id }}" value="3281" aria-invalid="true" aria-describedby="zip-err-{{ id }}">
+          <span class="form-error" id="zip-err-{{ id }}">Enter a five-digit ZIP code.</span>
+        </div>
+        <div>
+          <label class="form-check"><input type="radio" name="r-{{ id }}" checked> On campus</label>
+          <label class="form-check"><input type="radio" name="r-{{ id }}"> Online</label>
+          <label class="form-check"><input type="checkbox" checked> Email me updates</label>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Dropdown, modal and drawer</h3>
+      <div class="flex flex-wrap gap-3">
+        <details class="dropdown"><summary class="btn btn-outline btn-sm">Resources</summary>
+          <ul class="dropdown-menu"><li><a href="#">Catalog</a></li><li><a href="#">Calendar</a></li><li><a href="#">Financial aid</a></li></ul>
+        </details>
+        <button class="btn btn-sm" type="button" command="show-modal" commandfor="modal-{{ id }}">Open modal</button>
+        <button class="btn btn-text btn-sm" type="button" command="show-modal" commandfor="drawer-{{ id }}">Open drawer</button>
+      </div>
+      <dialog class="modal ucf-composition-{{ id }}" id="modal-{{ id }}" aria-labelledby="modal-title-{{ id }}">
+        <h2 class="type-h3" id="modal-title-{{ id }}">A modal on {{ id }}</h2>
+        <p class="mt-4">Escape closes it, and focus returns to the button that opened it.</p>
+        <button class="btn mt-6" type="button" command="close" commandfor="modal-{{ id }}">Close</button>
+      </dialog>
+      <dialog class="drawer ucf-composition-{{ id }}" id="drawer-{{ id }}" aria-labelledby="drawer-title-{{ id }}">
+        <div class="flex items-center justify-between"><h2 class="type-h4" id="drawer-title-{{ id }}">Filters</h2><button class="btn btn-text btn-sm" type="button" command="close" commandfor="drawer-{{ id }}">Close</button></div>
+        <label class="form-check mt-6"><input type="checkbox" checked> Online</label>
+      </dialog>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Accordion</h3>
+      <div class="accordion">
+        <details name="faq-{{ id }}" open><summary>When are applications due?</summary><p>Fall: May 1. Spring: November 1.</p></details>
+        <details name="faq-{{ id }}"><summary>Is there an application fee?</summary><p>Yes, and it can be waived for eligible applicants.</p></details>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Table</h3>
+      <div class="overflow-x-auto">
+        <table class="data-table data-table-striped">
+          <thead><tr><th scope="col">Term</th><th scope="col">Deadline</th></tr></thead>
+          <tbody><tr><td>Fall</td><td>May 1</td></tr><tr><td>Spring</td><td>November 1</td></tr><tr><td>Summer</td><td>March 1</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="type-h6 mb-3">Loading</h3>
+      <div class="flex items-center gap-4" role="status"><span class="spinner"></span><span>Loading…</span></div>
+      <progress class="progress mt-4" max="100" value="60" aria-label="Progress on {{ id }}">60%</progress>
+    </div>
+  </div>
+</div>

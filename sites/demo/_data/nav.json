@@ -1,0 +1,6 @@
+[
+  { "title": "Sample page", "url": "/" },
+  { "title": "Elements", "url": "/elements/" },
+  { "title": "Components", "url": "/components/" },
+  { "title": "Utilities", "url": "/utilities/" }
+]

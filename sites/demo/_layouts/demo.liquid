@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · UCF Tailwind Theme kitchen sink</title>
+  <link rel="stylesheet" href="/assets/fonts.css">
+  <link rel="stylesheet" href="/assets/demo.css">
+</head>
+<body>
+  <a class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 btn btn-sm" href="#main">Skip to content</a>
+  <div class="ucf-composition-dark-alt">
+    <p class="layout-wide py-2 type-data text-muted">Kitchen sink · stands in for the UCF university header, which every real UCF site carries above its navbar</p>
+  </div>
+  <header class="navbar ucf-composition-dark">
+    <div class="navbar-inner layout-wide">
+      <a class="navbar-brand" href="/">Kitchen sink</a>
+      <button class="navbar-toggle" popovertarget="site-menu">Menu</button>
+      <div class="navbar-menu" id="site-menu" popover>
+        <button class="navbar-close" popovertarget="site-menu" popovertargetaction="hide">Close</button>
+        <ul class="navbar-links">
+          {%- for item in nav %}
+          <li><a href="{{ item.url }}"{% if item.url == page.url %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+          {%- endfor %}
+          <li><a href="{{ links.docs }}">Docs</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    {{ content }}
+  </main>
+  <footer class="ucf-composition-dark">
+    <div class="layout-wide py-12 text-sm">
+      <p>Every section on these pages is built from the theme alone. Content and figures are placeholders.</p>
+    </div>
+  </footer>
+  {%- comment %} Opens dialogs from command/commandfor where the browser doesn't. See the modal docs. {% endcomment %}
+  <script>
+    if (!('commandForElement' in HTMLButtonElement.prototype)) {
+      document.addEventListener('click', (e) => {
+        const b = e.target.closest('button[commandfor]');
+        const d = b && document.getElementById(b.getAttribute('commandfor'));
+        if (d) b.getAttribute('command') === 'close' ? d.close() : d.showModal();
+      });
+    }
+  </script>
+</body>
+</html>

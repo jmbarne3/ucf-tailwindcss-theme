@@ -1,0 +1,7 @@
+[
+  { "slug": "light", "name": "Light - Default" },
+  { "slug": "alt", "name": "Light Alt" },
+  { "slug": "dark", "name": "Dark" },
+  { "slug": "dark-alt", "name": "Dark Alt" },
+  { "slug": "gold", "name": "Bold Gold" }
+]

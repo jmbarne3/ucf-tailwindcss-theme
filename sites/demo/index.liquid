@@ -1,4 +1,102 @@
 ---
-title: Kitchen sink
+layout: demo.liquid
+title: Sample page
 ---
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Kitchen sink</title><link rel="stylesheet" href="/assets/fonts.css"><link rel="stylesheet" href="/assets/demo.css"></head><body><h1 class="p-8">Kitchen sink</h1></body></html>
+{%- assign photo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23555'/%3E%3Cpath d='M0 9 5 4l3 3 3-4 5 6z' fill='%23999'/%3E%3C/svg%3E" %}
+<section class="media-background-container ucf-composition-dark">
+  <img class="media-background filter-sepia" src="{{ photo }}" alt="">
+  <div class="layout-wide py-section">
+    <nav aria-label="Breadcrumb" class="mb-10"><ol class="breadcrumb"><li><a href="#">Academics</a></li><li><span aria-current="page">Optics and Photonics</span></li></ol></nav>
+    <p class="type-data uppercase tracking-wider text-accent-text">Bachelor of Science</p>
+    <h1 class="type-display mt-4 max-w-[12ch]">Optics and Photonics</h1>
+    <p class="type-lead mt-6 max-w-measure">Study light at one of the nation's largest optics colleges, in labs where undergraduates work on the same problems as our researchers.</p>
+    <div class="flex flex-wrap gap-4 mt-10">
+      <a class="btn btn-lg" href="#">Apply now</a>
+      <a class="btn btn-outline btn-lg" href="#">Request information</a>
+    </div>
+  </div>
+</section>
+
+<section class="py-section">
+  <div class="layout-wide grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+    <div class="rich-text">
+      <h2 class="heading-underline">Why this program</h2>
+      <p>Placeholder copy for a program overview. A real page would describe the curriculum, the faculty and the kinds of careers graduates go on to.</p>
+      <p>The paragraph styles, list markers and spacing here come from <code>rich-text</code>, the way they would for content from a CMS.</p>
+      <ul><li>Hands-on lab work from the first year</li><li>Research placements with faculty</li><li>An optional minor in a related field</li></ul>
+    </div>
+    <aside class="card self-start">
+      <h2 class="type-h5">Program at a glance</h2>
+      <dl class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+        <div><dt class="type-data uppercase text-muted">Credit hours</dt><dd class="font-bold">120</dd></div>
+        <div><dt class="type-data uppercase text-muted">Format</dt><dd class="font-bold">On campus</dd></div>
+        <div><dt class="type-data uppercase text-muted">Start terms</dt><dd class="font-bold">Fall, Spring</dd></div>
+        <div><dt class="type-data uppercase text-muted">College</dt><dd class="font-bold">Optics</dd></div>
+      </dl>
+      <a class="btn btn-text btn-sm" href="#">Download the catalog page</a>
+    </aside>
+  </div>
+</section>
+
+<section class="ucf-composition-alt py-section">
+  <div class="layout-wide">
+    <h2 class="heading-underline">By the numbers</h2>
+    <div class="grid gap-gutter mt-10 sm:grid-cols-3">
+      <div class="card"><p class="type-display text-h1">94%</p><p class="text-muted">Placeholder statistic, for layout only</p></div>
+      <div class="card"><p class="type-display text-h1">1:12</p><p class="text-muted">Placeholder statistic, for layout only</p></div>
+      <div class="card"><p class="type-display text-h1">40+</p><p class="text-muted">Placeholder statistic, for layout only</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-section">
+  <div class="layout-wide">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 class="heading-underline">Related programs</h2>
+      <a class="btn btn-text" href="#">See all programs</a>
+    </div>
+    <div class="grid gap-gutter mt-10 md:grid-cols-3">
+      {%- assign related = "Physics, BS|Electrical Engineering, BSEE|Photonic Science and Engineering, MS" | split: "|" %}
+      {%- for p in related %}
+      <article class="card card-outline hover:border-line-strong">
+        <div class="card-media"><img class="aspect-video object-cover" src="{{ photo }}" alt=""></div>
+        <span class="badge self-start">{% if forloop.last %}Graduate{% else %}Undergraduate{% endif %}</span>
+        <h3 class="type-h4"><a class="text-heading no-underline hover:underline after:absolute after:inset-0" href="#">{{ p }}</a></h3>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ucf-composition-dark-alt py-section">
+  <div class="layout-content">
+    <blockquote class="blockquote-quotation">
+      <p class="type-h3 normal-case font-body font-medium leading-snug">Placeholder testimonial. A real page would quote a student or graduate here.</p>
+      <footer class="mt-4 type-data uppercase text-muted">Student name, class of 2027</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="ucf-composition-alt py-section">
+  <div class="layout-content">
+    <h2 class="heading-underline">Questions</h2>
+    <div class="accordion mt-8">
+      <details name="faq" open><summary>Do I need calculus before I start?</summary><p>Placeholder answer.</p></details>
+      <details name="faq"><summary>Can I transfer in from a state college?</summary><p>Placeholder answer.</p></details>
+      <details name="faq"><summary>Are there research positions for first-year students?</summary><p>Placeholder answer.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="ucf-composition-gold py-section">
+  <div class="layout-wide md:flex md:items-center md:justify-between gap-8">
+    <div>
+      <h2 class="type-h2">Start your application</h2>
+      <p class="type-lead mt-3">Fall applications are due May 1.</p>
+    </div>
+    <div class="flex flex-wrap gap-4 mt-8 md:mt-0">
+      <a class="btn btn-lg" href="#">Apply now</a>
+      <a class="btn btn-outline btn-lg" href="#">Visit campus</a>
+    </div>
+  </div>
+</section>

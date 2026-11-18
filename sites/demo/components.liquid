@@ -1,0 +1,12 @@
+---
+layout: demo.liquid
+title: Components
+---
+{%- for c in compositions %}
+<section class="ucf-composition-{{ c.slug }} py-section">
+  <div class="layout-wide">
+    {% render "section-heading.liquid", heading: c.name, slug: c.slug %}
+    {% render "sink-components.liquid", id: c.slug %}
+  </div>
+</section>
+{%- endfor %}

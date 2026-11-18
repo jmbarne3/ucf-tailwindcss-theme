@@ -1,0 +1,36 @@
+---
+layout: demo.liquid
+title: Elements
+---
+{%- for c in compositions %}
+<section class="ucf-composition-{{ c.slug }} py-section">
+  <div class="layout-wide">
+    {% render "section-heading.liquid", heading: c.name, slug: c.slug %}
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <p class="type-display">Display</p>
+        <h1 class="mt-4">Heading 1</h1>
+        <h2 class="mt-4">Heading 2</h2>
+        <h3 class="mt-4">Heading 3</h3>
+        <h4 class="mt-4">Heading 4</h4>
+        <h5 class="mt-4">Heading 5</h5>
+        <h6 class="mt-4">Heading 6</h6>
+        <p class="type-lead mt-6">A lead paragraph introduces the section.</p>
+        <p class="mt-4">Body copy with <a href="#">a link</a>, <strong>strong text</strong>, <em>emphasis</em> and <code>code</code>. <span class="text-muted">Muted text.</span> <span class="text-accent-text">Accent text.</span></p>
+        <p class="type-data mt-4">DATA · 0.8125REM · ROBOTO MONO</p>
+        <hr class="my-6">
+        <figure><div class="aspect-video bg-raised"></div><figcaption class="mt-2">Fig. 1 — A figure caption.</figcaption></figure>
+      </div>
+      <div class="rich-text">
+        <h2>Rich text</h2>
+        <p>Content from a CMS gets spacing, lists, quotes and tables from one class on its container.</p>
+        <ul><li>An unordered list item</li><li>A second item<ul><li>A nested item</li></ul></li></ul>
+        <ol><li>An ordered list item</li><li>A second item</li></ol>
+        <blockquote><p>A quotation set larger, with an accent rule.</p></blockquote>
+        <pre><code>npm install @ucf/tailwindcss-theme</code></pre>
+        <table><thead><tr><th>Degree</th><th>Credit hours</th></tr></thead><tbody><tr><td>BS</td><td>120</td></tr><tr><td>MS</td><td>30</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endfor %}
