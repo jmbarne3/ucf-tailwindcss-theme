@@ -19,7 +19,8 @@
     margin-block-start: 0.5em;
   }
 
-  & :where(> :first-child) {
+  /* Outranks the :where() rules above, so the first block never pushes the container down. */
+  & > :first-child {
     margin-block-start: 0;
   }
 
