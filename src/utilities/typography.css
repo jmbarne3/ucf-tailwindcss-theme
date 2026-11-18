@@ -1,0 +1,32 @@
+/*
+ * Type styles beyond the headings. `type-h1` to `type-h6` are generated from elements.json
+ * (generated/elements.css); these three have no element of their own.
+ */
+
+/* An introductory paragraph. Replaces Athena's `.lead`. */
+@utility type-lead {
+  color: var(--ucf-lead);
+  font-size: var(--ucf-font-size-lead);
+  line-height: 1.5;
+}
+
+/* The largest headline on a page, usually in a hero. Replaces Athena's `.display-1` to `.display-6`;
+   for a smaller display size, add `text-h1` after it. */
+@utility type-display {
+  color: var(--ucf-heading);
+  font-family: var(--ucf-font-family-display);
+  font-size: var(--ucf-font-size-display-1);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* SPEC: the brand reserves Roboto Mono for specifications, data, figure notes and very short
+   captions. */
+@utility type-data {
+  font-family: var(--ucf-font-family-mono);
+  font-size: var(--ucf-font-size-data);
+  line-height: 1.55;
+}
