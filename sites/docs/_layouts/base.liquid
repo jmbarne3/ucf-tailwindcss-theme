@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}UCF Tailwind Theme</title>
+  {%- if description %}<meta name="description" content="{{ description | strip_html }}">{% endif %}
+  <link rel="stylesheet" href="/assets/fonts.css">
+  <link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+  {% include "header.liquid" %}
+  {{ content }}
+  {% include "footer.liquid" %}
+</body>
+</html>

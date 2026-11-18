@@ -108,7 +108,7 @@ THEME.push( {
 // WHY sizes are renamed: the library's `body` and `lead` sizes would collide with the `body`
 // and `lead` color roles as `text-body` and `text-lead`. They take Tailwind's familiar
 // `text-base` and `text-lg`; the rest keep their names, and headings shorten to `text-h1`.
-const TEXT_NAMES = {
+export const TEXT_NAMES = {
 	data: 'data',
 	small: 'sm',
 	'data-lg': 'data-lg',

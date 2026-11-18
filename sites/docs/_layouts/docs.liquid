@@ -1,0 +1,16 @@
+---
+layout: base.liquid
+---
+<div class="layout-wide pt-10 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-14">
+  {% include "sidebar.liquid" %}
+  <main id="main">
+    <header class="mb-10 pb-8 border-b border-line">
+      <p class="type-data uppercase tracking-wider text-muted mb-3">{{ section }}</p>
+      <h1 class="heading-underline">{{ title }}</h1>
+      {%- if description %}<p class="type-lead mt-5 max-w-measure">{{ description | markdown }}</p>{% endif %}
+    </header>
+    <div class="docs-prose">
+      {{ content }}
+    </div>
+  </main>
+</div>

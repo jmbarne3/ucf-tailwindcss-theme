@@ -1,0 +1,46 @@
+---
+layout: base.liquid
+title: Home
+description: A Tailwind CSS v4 theme for UCF websites, built on the same design tokens as the UCF component library.
+---
+<main id="main">
+  <section class="ucf-composition-dark media-background-container">
+    <div class="layout-wide py-section">
+      <p class="type-data uppercase tracking-wider text-accent-text mb-4">Tailwind CSS v4 · 2026 brand</p>
+      <h1 class="type-display max-w-[14ch]">The UCF brand, as Tailwind utilities</h1>
+      <p class="type-lead mt-6 max-w-measure">One import gives a Tailwind site the brand's colors, type, spacing and square corners, and removes everything off-brand. The values are the component library's, so a page built with utilities matches the components placed on it.</p>
+      <div class="flex flex-wrap gap-4 mt-10">
+        <a class="btn btn-lg" href="/getting-started/installation/">Get started</a>
+        <a class="btn btn-outline btn-lg" href="{{ links.demo }}">See the kitchen sink</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="layout-wide py-section">
+    <h2 class="heading-underline">What it gives you</h2>
+    <div class="grid gap-6 mt-10 md:grid-cols-3">
+      <div class="card">
+        <h3 class="type-h4">Brand tokens</h3>
+        <p>Bold Gold, Horizon Blue for links, the brand's grays, Oswald, Montserrat and Roboto Mono, from the library's <code>tokens.json</code>.</p>
+        <a class="btn btn-text btn-sm mt-auto" href="/tokens/colors/">Browse the tokens</a>
+      </div>
+      <div class="card">
+        <h3 class="type-h4">Roles that follow the section</h3>
+        <p><code>text-heading</code>, <code>bg-raised</code> and <code>text-link</code> change with the section they're in. One set of classes works on light, dark and Bold Gold.</p>
+        <a class="btn btn-text btn-sm mt-auto" href="/tokens/roles-and-compositions/">How roles work</a>
+      </div>
+      <div class="card">
+        <h3 class="type-h4">Components without JavaScript</h3>
+        <p>Buttons, forms, cards, alerts and tables, plus a navbar, menus, accordions and modals built on <code>popover</code>, <code>&lt;details&gt;</code> and <code>&lt;dialog&gt;</code>.</p>
+        <a class="btn btn-text btn-sm mt-auto" href="/components/buttons/">See the components</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ucf-composition-gold">
+    <div class="layout-wide py-16 md:flex md:items-center md:justify-between gap-8">
+      <h2 class="type-h3">Coming from Athena?</h2>
+      <a class="btn mt-6 md:mt-0" href="/getting-started/coming-from-athena/">Map your classes</a>
+    </div>
+  </section>
+</main>

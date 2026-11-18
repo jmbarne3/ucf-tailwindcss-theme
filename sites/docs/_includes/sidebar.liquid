@@ -1,0 +1,18 @@
+{%- capture navlist -%}
+{%- for group in collections.nav -%}
+  {%- if group.pages.size > 0 -%}
+  <h2 class="type-data uppercase tracking-wider text-muted mt-6 first:mt-0 mb-2">{{ group.title }}</h2>
+  <ul class="space-y-0.5">
+    {%- for p in group.pages -%}
+    <li class="m-0"><a class="block py-1.5 px-3 -mx-3 text-sm text-body no-underline hover:underline aria-[current=page]:bg-raised aria-[current=page]:font-bold"
+      href="{{ p.url }}"{% if p.url == page.url %} aria-current="page"{% endif %}>{{ p.data.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+{%- endfor -%}
+{%- endcapture -%}
+<details class="lg:hidden border-y border-line py-3 mb-8">
+  <summary class="font-bold cursor-pointer min-h-tap flex items-center">Browse the docs</summary>
+  <nav aria-label="Documentation" class="pt-4">{{ navlist }}</nav>
+</details>
+<nav aria-label="Documentation" class="hidden lg:block sticky top-6 self-start max-h-[calc(100dvh-3rem)] overflow-y-auto pb-8">{{ navlist }}</nav>

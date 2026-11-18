@@ -1,0 +1,16 @@
+<a class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 btn btn-sm" href="#main">Skip to content</a>
+<header class="navbar ucf-composition-dark">
+  <div class="navbar-inner layout-wide">
+    <a class="navbar-brand" href="/">UCF Tailwind Theme</a>
+    <button class="navbar-toggle" popovertarget="site-menu">Menu</button>
+    <div class="navbar-menu" id="site-menu" popover>
+      <button class="navbar-close" popovertarget="site-menu" popovertargetaction="hide">Close</button>
+      <ul class="navbar-links">
+        <li><a href="/getting-started/installation/"{% if page.url contains '/getting-started/' %} aria-current="page"{% endif %}>Get started</a></li>
+        <li><a href="/tokens/colors/"{% if page.url contains '/tokens/' %} aria-current="page"{% endif %}>Tokens</a></li>
+        <li><a href="/components/buttons/"{% if page.url contains '/components/' %} aria-current="page"{% endif %}>Components</a></li>
+        <li><a href="{{ links.demo }}">Kitchen sink</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
