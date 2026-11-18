@@ -1,0 +1,38 @@
+/*
+ * Media backgrounds, carried over from Athena: an image or video positioned behind its
+ * container's content. Put `media-background-container` on the container and
+ * `media-background` on the <img> or <video>, or on a <picture> as the container's child.
+ * Crops to fill by default; any `object-*` utility changes that.
+ */
+@utility media-background-container {
+  /* FIX: clips videos cleanly in Chromium browsers. */
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+
+  & > picture {
+    height: calc(100% + 1px);
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: calc(100% + 1px);
+    z-index: -1;
+  }
+
+  & > picture > img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+@utility media-background {
+  /* FIX: the extra pixel prevents subpixel gaps at the edges. */
+  height: calc(100% + 1px);
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: calc(100% + 1px);
+  z-index: -1;
+}
