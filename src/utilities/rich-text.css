@@ -1,0 +1,91 @@
+/*
+ * Rich text: vertical rhythm, lists, quotes, code and tables for markup the site doesn't
+ * write class by class (CMS output, Markdown). Preflight removes margins and list markers
+ * everywhere; this puts them back inside one container.
+ *
+ * WHY :where() inside: the descendant rules stay at the specificity of `.rich-text` alone,
+ * so a utility on a child (`mt-0`, `list-none`) can still change it.
+ */
+@utility rich-text {
+  & :where(* + *) {
+    margin-block-start: 1em;
+  }
+
+  & :where(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: 1.5em;
+  }
+
+  & :where(h1, h2, h3, h4, h5, h6) + :where(*) {
+    margin-block-start: 0.5em;
+  }
+
+  & :where(> :first-child) {
+    margin-block-start: 0;
+  }
+
+  & :where(ul) {
+    list-style: disc;
+    padding-inline-start: 1.5em;
+  }
+
+  & :where(ol) {
+    list-style: decimal;
+    padding-inline-start: 1.5em;
+  }
+
+  & :where(li + li, li > ul, li > ol) {
+    margin-block-start: 0.25em;
+  }
+
+  & :where(li::marker) {
+    color: var(--ucf-muted);
+  }
+
+  & :where(blockquote) {
+    border-inline-start: var(--ucf-custom-rule-accent) solid var(--ucf-accent);
+    font-size: var(--ucf-font-size-lead);
+    padding-inline-start: 1.25em;
+  }
+
+  & :where(code) {
+    background-color: var(--ucf-raised);
+    font-family: var(--ucf-font-family-mono);
+    padding: 0.125em 0.3em;
+  }
+
+  & :where(pre) {
+    background-color: var(--ucf-raised);
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
+  }
+
+  & :where(pre code) {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  & :where(hr) {
+    margin-block: 2em;
+  }
+
+  & :where(img, video) {
+    height: auto;
+    max-width: 100%;
+  }
+
+  & :where(table) {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  & :where(th, td) {
+    border-bottom: var(--ucf-custom-border-hairline) solid var(--ucf-line);
+    padding: 0.625rem 0.75rem;
+    text-align: start;
+  }
+
+  & :where(th) {
+    border-bottom-color: var(--ucf-line-strong);
+    font-weight: 700;
+  }
+}
