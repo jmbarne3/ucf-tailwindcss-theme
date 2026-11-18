@@ -1,0 +1,52 @@
+/*
+ * Accordion: a stack of <details>, with no JavaScript. Give every <details> the same `name`
+ * for one-open-at-a-time behavior.
+ *
+ *   <div class="accordion">
+ *     <details name="faq"><summary>Question</summary><div>Answer</div></details>
+ *   </div>
+ *
+ * A11Y: the browser gives each summary its button role and expanded state, and find-in-page
+ * opens a closed panel that holds the match.
+ */
+@utility accordion {
+  border-top: var(--ucf-custom-border-hairline) solid var(--ucf-line);
+
+  & > details {
+    border-bottom: var(--ucf-custom-border-hairline) solid var(--ucf-line);
+  }
+
+  & > details > summary {
+    align-items: center;
+    color: var(--ucf-heading);
+    cursor: pointer;
+    display: flex;
+    font-weight: 700;
+    gap: 1rem;
+    justify-content: space-between;
+    list-style: none;
+    min-height: var(--ucf-custom-tap-target);
+    padding-block: 1rem;
+  }
+
+  & > details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  & > details > summary::after {
+    color: var(--ucf-indicator);
+    content: '+' / '';
+    flex-shrink: 0;
+    font-family: var(--ucf-font-family-display);
+    font-size: 1.5em;
+    line-height: 1;
+  }
+
+  & > details[open] > summary::after {
+    content: '\2212' / '';
+  }
+
+  & > details > summary ~ * {
+    padding-bottom: 1.25rem;
+  }
+}
