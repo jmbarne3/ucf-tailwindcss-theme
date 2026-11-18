@@ -36,7 +36,7 @@
     "serve:demo": "eleventy --config=sites/demo/eleventy.config.js --serve --port=8081",
     "sync:tokens": "node scripts/sync-tokens.mjs",
     "check:tokens": "node scripts/sync-tokens.mjs --check",
-    "test": "node --test test/",
+    "test": "node --test test/*.test.mjs",
     "clean": "rm -rf _site"
   },
   "devDependencies": {
