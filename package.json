@@ -1,0 +1,52 @@
+{
+  "name": "@ucf/tailwindcss-theme",
+  "version": "0.1.0",
+  "description": "A Tailwind CSS v4 theme for UCF websites and applications, built on the UCF component library's design tokens",
+  "private": true,
+  "type": "module",
+  "author": {
+    "name": "UCF Web Communications",
+    "url": "https://github.com/UCF"
+  },
+  "exports": {
+    ".": {
+      "style": "./src/index.css",
+      "default": "./src/index.css"
+    },
+    "./fonts.css": "./src/fonts.css",
+    "./fonts/*": "./src/fonts/*",
+    "./tokens.json": "./tokens/tokens.json"
+  },
+  "files": [
+    "src",
+    "tokens"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "npm run build:tokens && concurrently --kill-others-on-fail --names docs-css,docs,demo-css,demo --prefix-colors yellow,blue,magenta,cyan \"npm:watch:docs-css\" \"npm:serve:docs\" \"npm:watch:demo-css\" \"npm:serve:demo\"",
+    "build": "npm run build:tokens && npm run build:docs && npm run build:demo",
+    "build:tokens": "node scripts/build-tokens.mjs",
+    "build:docs": "eleventy --config=sites/docs/eleventy.config.js && tailwindcss -i sites/docs/assets/docs.css -o _site/docs/assets/docs.css --minify",
+    "build:demo": "eleventy --config=sites/demo/eleventy.config.js && tailwindcss -i sites/demo/assets/demo.css -o _site/demo/assets/demo.css --minify",
+    "watch:docs-css": "tailwindcss -i sites/docs/assets/docs.css -o _site/docs/assets/docs.css --watch=always",
+    "watch:demo-css": "tailwindcss -i sites/demo/assets/demo.css -o _site/demo/assets/demo.css --watch=always",
+    "serve:docs": "eleventy --config=sites/docs/eleventy.config.js --serve --port=8080",
+    "serve:demo": "eleventy --config=sites/demo/eleventy.config.js --serve --port=8081",
+    "sync:tokens": "node scripts/sync-tokens.mjs",
+    "check:tokens": "node scripts/sync-tokens.mjs --check",
+    "test": "node --test test/",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "@tailwindcss/cli": "^4.3.5",
+    "@tailwindcss/node": "^4.3.5",
+    "concurrently": "^10.0.7",
+    "markdown-it": "^15.0.3",
+    "markdown-it-anchor": "^10.1.0",
+    "shiki": "^4.6.0",
+    "tailwindcss": "^4.3.5"
+  }
+}
