@@ -1,0 +1,30 @@
+/*
+ * Breadcrumb: <nav aria-label="Breadcrumb"><ol class="breadcrumb">…</ol></nav>, with
+ * aria-current="page" on the last item.
+ */
+@utility breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--ucf-font-size-small);
+  gap: 0.25rem 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  & > li {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  /* A11Y: the separator has empty alternative text, so screen readers don't read "slash". */
+  & > li + li::before {
+    color: var(--ucf-muted);
+    content: '/' / '';
+  }
+
+  & [aria-current='page'] {
+    color: var(--ucf-muted);
+  }
+}
