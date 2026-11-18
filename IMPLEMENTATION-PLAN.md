@@ -1,6 +1,6 @@
 # UCF Tailwind CSS Theme — Implementation Plan
 
-**Status:** Approved, in progress · **Prepared:** November 18, 2026 · **Repository:** local only, not linked to GitHub
+**Status:** First pass complete, local only · **Prepared:** November 18, 2026 · **Repository:** local only, not linked to GitHub
 
 ## What this project is
 
@@ -69,10 +69,22 @@ Each commit is small and does one thing, so you can review them one at a time. T
 
 A clean build is not enough. **The test that matters is that an off-brand page cannot be built**: compiling `bg-red-500 rounded-lg text-3xl` should produce no CSS. Alongside that, we'll script contrast checks for every role pair on every composition against WCAG 2.1 AA, and check that every `--ucf-*` variable the theme reads exists in `tokens.json`. If axe can run locally against the kitchen sink, I'll run it. If it can't, I'll say so rather than claim it passed.
 
+## Where it stands
+
+Every step above is done, and `npm run check` passes: token freshness, eight tests, both site builds and an axe pass over all 32 pages. Three things came out differently from the plan, and one finding needs action outside this repository.
+
+- **The library's `body` and `lead` sizes are `text-base` and `text-lg` here.** As `text-body` and `text-lead` they would have collided with the color roles of the same names.
+- **Athena's `.table` is `data-table`,** because Tailwind's `table` utility already means `display: table`.
+- **The dropdown is built on `<details>`, not a popover.** A popover needs CSS anchor positioning to sit beside its button, and we can't rely on it across our browser range.
+- **We found a contrast gap in the library's tokens.** On the Bold Gold composition, the `danger` and `success` roles measure 3.59:1 and 3.43:1 against the gold background. The library's tests check text roles against each composition's field and raised panel, not its own background, so the gap went unnoticed. It matters here because `form-error` text sits on the section. The docs warn about it, and the tests and axe check carry it as an explicit known gap that fails once the tokens are fixed. **The fix belongs in the library's `tokens.json`.**
+
 ## Limits and open questions
 
 These don't block the work, but someone should own them.
 
 - **The link color is still unconfirmed.** The library's `#1F6A9A` is what we'd inherit. Neither it nor Athena's `#376D91` has brand office sign-off that I can find.
 - **Licensing is undecided.** Athena is MIT and the component library is GPL-3.0-or-later. I've left the license out until you choose.
+- **The library's CSS load order is untested.** The docs recommend importing `ucf.css` into Tailwind's `components` layer. That follows from how cascade layers work, but no page here loads the library.
+- **`command`/`commandfor` support is unverified.** The modal docs ship a small fallback script until someone checks each browser's support.
+- **A dev-only advisory.** `npm audit` reports a ReDoS issue in `picomatch` through Eleventy's file watcher. It affects local tooling only, and the suggested fix downgrades Eleventy.
 - **The package name is a placeholder.** `@ucf/tailwindcss-theme` matches the library's scope but won't be published. It stays `private` until we link a GitHub repository.
