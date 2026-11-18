@@ -7,7 +7,8 @@ import markdownItAnchor from 'markdown-it-anchor';
 import { createHighlighter } from 'shiki';
 
 const LANGS = [ 'html', 'css', 'js', 'json', 'shell', 'jsx' ];
-const THEME = 'github-light';
+// A11Y: the high-contrast variant; plain github-light's greens and oranges fall below 4.5:1 on gray-050.
+const THEME = 'github-light-high-contrast';
 
 const escapeHtml = ( s ) =>
 	s.replace( /&/g, '&amp;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' ).replace( /"/g, '&quot;' );
