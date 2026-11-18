@@ -162,6 +162,28 @@ THEME.push( {
 	],
 } );
 
+// Spacing and layout. WHY Tailwind's 0.25rem step stays: it already holds every step of the
+// library's scale (spacing 40 is `p-4`, spacing 90 is `p-24`). The library's named measures
+// are added beside it: `px-gutter`, `py-section`, `min-h-tap`, `max-w-wide`.
+THEME.push( {
+	entries: [
+		[ '--spacing-gutter', 'var(--ucf-custom-gutter)' ],
+		[ '--spacing-section', 'var(--ucf-custom-section-y)' ],
+		[ '--spacing-tap', 'var(--ucf-custom-tap-target)' ],
+		...tokensOf( 'layout' ).map( ( t ) => [ `--container-${ t.slug }`, `var(${ t.cssVar })` ] ),
+		[ '--container-measure', 'var(--ucf-custom-measure)' ],
+	],
+} );
+
+// Shape. SPEC: "no rounded corners or circles" (brand section 8.3), so every radius is
+// cleared and `rounded-sm` to `rounded-4xl` compile to nothing. `rounded-full` is built into
+// Tailwind and can't be removed; it is for radios and spinners only.
+// Tailwind's shadows go too; the library defines one, for overlays.
+THEME.push( {
+	clear: [ '--radius-*', '--shadow-*' ],
+	entries: tokensOf( 'shadow' ).map( ( t ) => [ `--shadow-${ t.slug }`, `var(${ t.cssVar })` ] ),
+} );
+
 export function themeCss() {
 	const clear = THEME.flatMap( ( n ) => n.clear ?? [] );
 	const defaults = THEME.flatMap( ( n ) => n.defaults ?? [] );

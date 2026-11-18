@@ -4,6 +4,8 @@
 	--color-*: initial;
 	--font-*: initial;
 	--text-*: initial;
+	--radius-*: initial;
+	--shadow-*: initial;
 	--default-font-family: var(--ucf-font-family-body);
 	--default-mono-font-family: var(--ucf-font-family-mono);
 }
@@ -92,4 +94,11 @@
 	--tracking-button: var(--ucf-custom-button-letter-spacing);
 	--leading-heading: 1.1;
 	--leading-body: 1.65;
+	--spacing-gutter: var(--ucf-custom-gutter);
+	--spacing-section: var(--ucf-custom-section-y);
+	--spacing-tap: var(--ucf-custom-tap-target);
+	--container-content: var(--ucf-layout-content);
+	--container-wide: var(--ucf-layout-wide);
+	--container-measure: var(--ucf-custom-measure);
+	--shadow-overlay: var(--ucf-shadow-overlay);
 }
