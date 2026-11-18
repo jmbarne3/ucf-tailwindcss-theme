@@ -1,0 +1,110 @@
+/*
+ * Buttons. SYNC: the component library's Button primitive (primitives/button/style.css): the
+ * same measurements, the same roles, the same hover inversion, so a `btn` and a library
+ * <Button> sit side by side and match on every composition.
+ *
+ *   btn                 Fill: the main action
+ *   btn btn-outline     Outline: the second action
+ *   btn btn-text        Text: a link-weight action with a heavy underline
+ *   btn-sm, btn-lg      44px and 60px tall (the default is 52px)
+ *
+ * WHY variants set --btn-* variables instead of properties: `btn btn-outline` then works
+ * whichever order Tailwind emits the two in, and a size never undoes the Text style's flush
+ * padding. A plain utility (`w-full`, `bg-black`) still overrides `btn`, because Tailwind
+ * emits single-property utilities after multi-property ones.
+ */
+@utility btn {
+  align-items: center;
+  background-color: var(--btn-bg, var(--ucf-button));
+
+  /* SPEC: every button carries a 2px border, transparent on the fill, so a fill and an
+     outline side by side are the same height. */
+  border: var(--ucf-custom-border-control) solid var(--btn-border, transparent);
+  box-sizing: border-box;
+  color: var(--btn-fg, var(--ucf-button-text));
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--ucf-font-family-body);
+  font-size: var(--btn-font-size, var(--ucf-font-size-data-lg));
+  font-weight: 700;
+  gap: 0.5em;
+  justify-content: center;
+  letter-spacing: var(--ucf-custom-button-letter-spacing);
+  line-height: 1.2;
+  min-height: var(--btn-text-min-height, var(--btn-min-height, var(--ucf-custom-button-min-height)));
+  padding-block: var(--btn-py, var(--ucf-custom-button-padding-y));
+  padding-inline: var(--btn-text-px, var(--btn-px, var(--ucf-custom-button-padding-x)));
+  text-align: center;
+  text-decoration-color: var(--ucf-indicator);
+  text-decoration-line: var(--btn-decoration, none);
+  text-decoration-thickness: var(--ucf-custom-button-underline);
+  text-transform: none;
+  text-underline-offset: var(--ucf-custom-button-underline-offset);
+
+  /* SPEC: hover inverts rather than fades, and the only motion is 150ms on color. */
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    text-decoration-color 0.15s ease;
+  width: fit-content;
+
+  &:hover,
+  &:focus {
+    background-color: var(--btn-hover-bg, var(--ucf-button-hover));
+    border-color: var(--btn-hover-border, transparent);
+    color: var(--btn-hover-fg, var(--ucf-button-hover-text));
+    text-decoration-line: var(--btn-decoration, none);
+    text-decoration-thickness: var(--ucf-custom-button-underline-hover);
+    text-underline-offset: var(--ucf-custom-button-underline-offset-hover);
+  }
+
+  &:focus-visible {
+    outline: var(--ucf-custom-focus-width) solid var(--ucf-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}
+
+/* WHY hover fills with the outline color rather than shifting it: a second outline shade
+   would have to clear contrast on the field as well. */
+@utility btn-outline {
+  --btn-bg: transparent;
+  --btn-border: currentcolor;
+  --btn-fg: var(--ucf-button-outline);
+  --btn-hover-bg: var(--ucf-button-outline);
+  --btn-hover-border: var(--ucf-button-outline);
+  --btn-hover-fg: var(--ucf-button-outline-on);
+}
+
+/* A11Y: the underline thickens on hover rather than changing color, so the state shows in
+   shape; the 44px height keeps it a full tap target though it reads as text. */
+@utility btn-text {
+  --btn-bg: transparent;
+  --btn-decoration: underline;
+  --btn-fg: var(--ucf-body);
+  --btn-hover-bg: transparent;
+  --btn-hover-fg: var(--ucf-body);
+  --btn-text-min-height: var(--ucf-custom-tap-target);
+  --btn-text-px: 0;
+}
+
+@utility btn-sm {
+  --btn-font-size: var(--ucf-font-size-small);
+  --btn-min-height: var(--ucf-custom-tap-target);
+  --btn-px: var(--ucf-custom-button-padding-x-small);
+  --btn-py: var(--ucf-custom-button-padding-y-small);
+}
+
+@utility btn-lg {
+  --btn-font-size: var(--ucf-font-size-body);
+  --btn-min-height: var(--ucf-custom-button-min-height-large);
+  --btn-px: var(--ucf-custom-button-padding-x-large);
+  --btn-py: var(--ucf-custom-button-padding-y-large);
+}
