@@ -29,6 +29,6 @@ Athena centered everything in `.container`. The brand's pages are built differen
 
 ## Choosing compositions down a page
 
-Alternate light and dark sections down a page, and use **at most one Bold Gold section**, usually the closing call to action. When two sections of the same kind sit next to each other, use the Alt version of one so the edge between them shows. The [kitchen sink](/getting-started/installation/) has a full page built this way.
+Alternate light and dark sections down a page, and use **at most one Bold Gold section**, usually the closing call to action. When two sections of the same kind sit next to each other, use the Alt version of one so the edge between them shows. The [kitchen sink]({{ links.demo }}) has a full page built this way.
 
 Full-bleed media sections use [media backgrounds](/utilities/brand-utilities/#media-backgrounds) to put a photo or video behind the content.
